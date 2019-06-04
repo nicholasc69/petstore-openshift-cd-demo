@@ -402,9 +402,9 @@ objects:
 
             cat <<EOF > /tmp/data.json
             {
-              "clone_addr": "https://github.com/nicholasc69/openshift-application-petstore-ee7.git",
+              "clone_addr": "https://github.com/nicholasc69/petstore-openshift.git",
               "uid": 1,
-              "repo_name": "openshift-application-petstore-ee7"
+              "repo_name": "petstore-openshift"
             }
             EOF
 
@@ -412,7 +412,7 @@ objects:
             -u $GOGS_USER:$GOGS_PWD -X POST http://$GOGS_SVC:3000/api/v1/repos/migrate -d @/tmp/data.json)
 
             if [ $_RETURN != "201" ] ;then
-              echo "ERROR: Failed to import openshift-application-petstore-ee7 GitHub repo"
+              echo "ERROR: Failed to import petstore-openshift GitHub repo"
               cat /tmp/curl.log
               exit 255
             fi
