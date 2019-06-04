@@ -142,8 +142,8 @@ done
 LOGGEDIN_USER=$(oc $ARG_OC_OPS whoami)
 OPENSHIFT_USER=${ARG_USERNAME:-$LOGGEDIN_USER}
 PRJ_SUFFIX=${ARG_PROJECT_SUFFIX:-`echo $OPENSHIFT_USER | sed -e 's/[-@].*//g'`}
-GITHUB_ACCOUNT=${GITHUB_ACCOUNT:-siamaksade}
-GITHUB_REF=${GITHUB_REF:-ocp-3.11}
+GITHUB_ACCOUNT=${GITHUB_ACCOUNT:-nicholasc69}
+GITHUB_REF=${GITHUB_REF:-master}
 
 function deploy() {
   oc $ARG_OC_OPS new-project dev-$PRJ_SUFFIX   --display-name="Tasks - Dev"
@@ -173,7 +173,7 @@ function deploy() {
 
   sleep 2
 
-  local template=https://raw.githubusercontent.com/$GITHUB_ACCOUNT/openshift-cd-demo/$GITHUB_REF/cicd-template.yaml
+  local template=https://raw.githubusercontent.com/$GITHUB_ACCOUNT/petstore-openshift-cd-demo/$GITHUB_REF/cicd-template.yaml
   echo "Using template $template"
   oc $ARG_OC_OPS new-app -f $template -p DEV_PROJECT=dev-$PRJ_SUFFIX -p STAGE_PROJECT=stage-$PRJ_SUFFIX -p DEPLOY_CHE=$ARG_DEPLOY_CHE -p EPHEMERAL=$ARG_EPHEMERAL -p ENABLE_QUAY=$ARG_ENABLE_QUAY -p QUAY_USERNAME=$ARG_QUAY_USER -p QUAY_PASSWORD=$ARG_QUAY_PASS -n cicd-$PRJ_SUFFIX 
 }
